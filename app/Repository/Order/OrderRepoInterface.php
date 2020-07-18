@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 interface OrderRepoInterface extends BaseRepoInterface
 {
     public function getDatatableRelation();
+
+    public function findWithRelation($column, $value);
 }

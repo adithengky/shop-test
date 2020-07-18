@@ -24,13 +24,16 @@ Route::post('/order', 'OrderController@store');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['jwt.verify']], function() {
     Route::get('/product', 'ProductController@all');
-    Route::get('/product/create', 'ProductController@create');
-    Route::post('/product/create', 'ProductController@store');
+    Route::post('/product', 'ProductController@store');
     Route::get('/product/{id}', 'ProductController@get');
-    Route::post('/product/{id}', 'ProductController@update');
+    Route::put('/product/{id}', 'ProductController@update');
+    Route::delete('/product/{id}', 'ProductController@delete');
 
     Route::get('/order', 'OrderController@all');
+    Route::get('/order/{id}', 'OrderController@get');
+    Route::delete('/order/{id}', 'OrderController@delete');
 
     Route::get('/user', 'UserController@all');
+    Route::get('/user/{id}', 'UserController@get');
     Route::get('/logout', 'UserController@logout');
 });

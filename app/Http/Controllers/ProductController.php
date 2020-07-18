@@ -42,7 +42,7 @@ class ProductController extends Controller
         }
         $input = $request->only('name', 'price');
         $result = $this->productRepository->update('id', $id, $input);
-        return $this->successResponse(200, 'success', $product);
+        return $this->successResponse(200, 'success');
     }
 
     public function delete($id) {
@@ -51,6 +51,6 @@ class ProductController extends Controller
             return $this->errorResponse(404, 'Not Found');
         }
         $result = $this->productRepository->delete('id', $id);
-        return $this->successResponse(200, 'success', $product);
+        return $this->successResponse(200, 'success');
     }
 }

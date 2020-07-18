@@ -71,4 +71,21 @@ class OrderController extends Controller
         $orders = $this->orderRepository->getDatatableRelation();
         return $this->successResponse(200, 'success', $orders);
     }
+
+    public function delete($id) {
+        $order = $this->orderRepository->find('id', $id);
+        if (!$order) {
+            return $this->errorResponse(404, 'Not Found');
+        }
+        $result = $this->orderRepository->delete('id', $id);
+        return $this->successResponse(200, 'success');
+    }
+
+    public function get($id) {
+        $order = $this->orderRepository->findWithRelation('id', $id);
+        if (!$order) {
+            return $this->errorResponse(404, 'Not Found');
+        }
+        return $this->successResponse(200, 'success', $order);
+    }
 }

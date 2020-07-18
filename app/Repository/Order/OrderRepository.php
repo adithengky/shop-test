@@ -18,4 +18,8 @@ class OrderRepository extends BaseRepository implements OrderRepoInterface
         $query = $this->model->with(['product', 'user'])->get();
         return DataTables::of($query)->make(true);
     }
+
+    public function findWithRelation($column, $value) {
+        return $this->model->with(['product', 'user'])->where($column, $value)->first();
+    }
 }

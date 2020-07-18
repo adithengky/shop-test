@@ -7,6 +7,7 @@ use App\Repository\User\UserRepoInterface;
 use Illuminate\Support\Facades\Auth;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Http\Requests\LoginRequest;
 
 class UserController extends Controller
 {
@@ -23,7 +24,7 @@ class UserController extends Controller
         return $this->successResponse(200, 'success', $users);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
 
@@ -38,7 +39,14 @@ class UserController extends Controller
         return $this->successResponse(200, 'success', compact('token'));
     }
 
-    public function logout() {
+    public function logout() 
+    {
+        $logout = JWTAuth::parseToken()->invalidate();
         return $this->successResponse(200, 'logged out');
+    }
+
+    public function get($id) {
+        $user = $this->userRepository->find('id', $id);
+        return $this->successResponse(200, 'success', $user);
     }
 }
